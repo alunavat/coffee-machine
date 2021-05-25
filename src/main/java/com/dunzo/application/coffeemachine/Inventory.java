@@ -1,6 +1,6 @@
 package com.dunzo.application.coffeemachine;
 
-import com.dunzo.application.coffeemachine.utility.Constants;
+import com.dunzo.application.coffeemachine.utility.AppConstants;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -10,41 +10,41 @@ import java.util.Map;
 public class Inventory{
     // Inventory keeps track of available Ingredient quantities
     private static Map<String, Integer> inventoryMap = new HashMap<>();
-
     final List<String> ingredientsList = Arrays.asList(
-            Constants.MILK,Constants.WATER,Constants.GINGER_SYRUP,
-            Constants.TEA_LEAVES_SYRUP,Constants.COFFEE_SYRUP,
-            Constants.ELAICHI_SYRUP,Constants.SUGAR_SYRUP
+            AppConstants.MILK, AppConstants.WATER, AppConstants.GINGER_SYRUP,
+            AppConstants.TEA_LEAVES_SYRUP, AppConstants.COFFEE_SYRUP,
+            AppConstants.ELAICHI_SYRUP, AppConstants.SUGAR_SYRUP
     );
 
-    // This is invoked when the machine is first started and fills the inventory to default settings.
+    // Constructor initialises the inventory to default settings.
     public Inventory() {
         for(String item : ingredientsList){
-            if(item.equals(Constants.WATER)){
-                this.inventoryMap.put(item,Constants.REFILL_AMOUNT_WATER);
+            if(item.equals(AppConstants.WATER)){
+                inventoryMap.put(item, AppConstants.REFILL_AMOUNT_WATER);
             }
             else {
-                this.inventoryMap.put(item, Constants.REFILL_AMOUNT);
+                inventoryMap.put(item, AppConstants.REFILL_AMOUNT);
             }
         }
     }
 
-    // This method will allow for the inventory to be refilled.
+    // The method will be used to refill any ingredient in our inventory.
     public void refillIngredient(String refillIngredient){
-        int refillAmount = Constants.REFILL_AMOUNT;
-        if (refillIngredient.equals(Constants.WATER)){
-            refillAmount = Constants.REFILL_AMOUNT_WATER;
+        int refillAmount = AppConstants.REFILL_AMOUNT;
+        if (refillIngredient.equals(AppConstants.WATER)){
+            refillAmount = AppConstants.REFILL_AMOUNT_WATER;
         }
         inventoryMap.put(refillIngredient, inventoryMap.getOrDefault(refillIngredient,0) + refillAmount);
     }
 
-    // checking the inventory to ensure a beverage can be served.
+    // Checking the inventory to ensure a beverage can be served.
+    // Beverage is dispensed only if all ingredients are found and in required quantity.
     public synchronized void checkInInventory(Map<String,Integer> ingredients) throws Exception {
         for (String ingredient : ingredients.keySet()) {
             if (!inventoryMap.containsKey(ingredient))
-                throw new Exception(ingredient + Constants.INGREDIENT_UNAVAILABLE_EXCEPTION);
+                throw new Exception(ingredient + AppConstants.INGREDIENT_UNAVAILABLE_EXCEPTION);
             else if (getIngredientQuantity(ingredient) < ingredients.get(ingredient))
-                throw new Exception(ingredient + Constants.INGREDIENT_INSUFFICIENT_EXCEPTION);
+                throw new Exception(ingredient + AppConstants.INGREDIENT_INSUFFICIENT_EXCEPTION);
         }
         updateInventoryOnDispense(ingredients);
     }
@@ -54,7 +54,7 @@ public class Inventory{
     public void updateInventoryOnDispense(Map<String,Integer> ingredients){
         for (String ingredient : ingredients.keySet()){
             inventoryMap.put(ingredient, getIngredientQuantity(ingredient) - ingredients.get(ingredient));
-            if(getIngredientQuantity(ingredient) <= Constants.ALERT_AMOUNT){
+            if(getIngredientQuantity(ingredient) <= AppConstants.ALERT_AMOUNT){
                 alertLowQuantity(ingredient);
             }
         }

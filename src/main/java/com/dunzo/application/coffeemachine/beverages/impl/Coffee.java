@@ -1,15 +1,15 @@
 package com.dunzo.application.coffeemachine.beverages.impl;
 
 import com.dunzo.application.coffeemachine.beverages.Beverage;
-import com.dunzo.application.coffeemachine.utility.Constants;
+import com.dunzo.application.coffeemachine.utility.AppConstants;
 
 import java.util.Map;
 
 public class Coffee implements Beverage {
     final String name = "Coffee";
     private final Map<String,Integer> composition = Map.of(
-            Constants.WATER,50,Constants.MILK,10,
-            Constants.COFFEE_SYRUP,10, Constants.SUGAR_SYRUP,10);
+            AppConstants.WATER,50, AppConstants.MILK,10,
+            AppConstants.COFFEE_SYRUP,10, AppConstants.SUGAR_SYRUP,10);
 
     public Coffee() {
     }

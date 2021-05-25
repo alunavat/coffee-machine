@@ -1,6 +1,6 @@
 package com.dunzo.application.coffeemachine.utility;
 
-public class Constants {
+public class AppConstants {
     public static final String MILK = "Milk";
     public static final String WATER = "Water";
     public static final String GINGER_SYRUP = "Ginger Syrup";
@@ -13,5 +13,5 @@ public class Constants {
     public static final int REFILL_AMOUNT = 200;
     public static final int REFILL_AMOUNT_WATER = 500;
     public static final int ALERT_AMOUNT = 10;
-    public static final int PARALLEL_DRINKS_LIMIT = 10;
+    public static final int PARALLEL_DRINKS_LIMIT = 3;
 }

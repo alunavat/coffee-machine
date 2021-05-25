@@ -1,6 +1,6 @@
 package com.dunzo.application.coffeemachine.beverages.impl;
 import com.dunzo.application.coffeemachine.beverages.Beverage;
-import com.dunzo.application.coffeemachine.utility.Constants;
+import com.dunzo.application.coffeemachine.utility.AppConstants;
 
 import java.util.Map;
 
@@ -8,9 +8,9 @@ public class GingerTea implements Beverage {
 
     final String name = "Ginger Tea";
     private final Map<String,Integer> composition = Map.of(
-            Constants.WATER,50,Constants.MILK,10,
-            Constants.TEA_LEAVES_SYRUP,10,
-            Constants.GINGER_SYRUP,5,Constants.SUGAR_SYRUP,10);
+            AppConstants.WATER,50, AppConstants.MILK,10,
+            AppConstants.TEA_LEAVES_SYRUP,10,
+            AppConstants.GINGER_SYRUP,5, AppConstants.SUGAR_SYRUP,10);
 
     public GingerTea() {
     }
