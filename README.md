@@ -12,3 +12,4 @@ Key Features:
 2. The test cases can be executed to ensure all features are working as expected.
 
 Note : A beverage will be served only if all the ingredients are available and in apt quantity.  
+
